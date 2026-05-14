@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 export type CultureType = "buddhist" | "taoist" | "mazu" | null;
 
@@ -11,8 +11,6 @@ interface CultureTheme {
   icon: string;
   description: string;
 }
-
-const CULTURE_STORAGE_KEY = "selected_culture";
 
 const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
   buddhist: {
@@ -53,30 +51,8 @@ interface CultureContextType {
 
 const CultureContext = createContext<CultureContextType | undefined>(undefined);
 
-function isCultureType(value: string | null): value is Exclude<CultureType, null> {
-  return value === "buddhist" || value === "taoist" || value === "mazu";
-}
-
 export function CultureProvider({ children }: { children: ReactNode }) {
-  const [culture, setCultureState] = useState<CultureType>(() => {
-    if (typeof window === "undefined") return null;
-    const saved = localStorage.getItem(CULTURE_STORAGE_KEY);
-    return isCultureType(saved) ? saved : null;
-  });
-
-  const setCulture = (nextCulture: CultureType) => {
-    setCultureState(nextCulture);
-  };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (culture) {
-      localStorage.setItem(CULTURE_STORAGE_KEY, culture);
-    } else {
-      localStorage.removeItem(CULTURE_STORAGE_KEY);
-    }
-  }, [culture]);
-
+  const [culture, setCulture] = useState<CultureType>(null);
   const theme = culture ? cultureThemes[culture] : null;
 
   return (
