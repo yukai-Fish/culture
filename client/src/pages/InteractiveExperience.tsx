@@ -9,6 +9,7 @@ import { useCulture } from "@/contexts/CultureContext";
 import Navigation from "@/components/Navigation";
 import { useLocation } from "wouter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import immersiveInteractionVideo from "@/assets/immersive-interaction-video.mp4";
 
 // Merit messages
 const meritMessages = [
@@ -118,6 +119,26 @@ export default function InteractiveExperience() {
       <Navigation />
 
       <div className="pt-20 pb-8 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-6xl mx-auto mb-8"
+        >
+          <div className="glass-card rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10">
+            <video
+              className="w-full h-auto block"
+              src={immersiveInteractionVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
