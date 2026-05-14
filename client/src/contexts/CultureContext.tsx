@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 export type CultureType = "buddhist" | "taoist" | "mazu" | null;
 
@@ -19,7 +19,7 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#8B6914",
     gradient: "from-amber-50 via-yellow-50 to-pink-50",
     name: "佛教",
-    icon: "莲",
+    icon: "🪷",
     description: "慈悲为怀，普度众生",
   },
   taoist: {
@@ -28,7 +28,7 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#2D5A3E",
     gradient: "from-green-50 via-emerald-50 to-stone-50",
     name: "道教",
-    icon: "道",
+    icon: "☯",
     description: "道法自然，天人合一",
   },
   mazu: {
@@ -37,8 +37,8 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#1E4D6B",
     gradient: "from-blue-50 via-cyan-50 to-sky-50",
     name: "妈祖",
-    icon: "海",
-    description: "护海佑民，祈福平安",
+    icon: "⛵",
+    description: "护佑平安，海上女神",
   },
 };
 
@@ -53,6 +53,7 @@ const CultureContext = createContext<CultureContextType | undefined>(undefined);
 
 export function CultureProvider({ children }: { children: ReactNode }) {
   const [culture, setCulture] = useState<CultureType>(null);
+
   const theme = culture ? cultureThemes[culture] : null;
 
   return (
