@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import { useLocation } from "wouter";
 import buddhistMapImage from "@/assets/buddhist-map.png";
 import cultureLongImage from "@/assets/culture-long-image.png";
+import leshanBuddhaTourVideo from "@/assets/leshan-buddha-tour.mp4";
 
 interface Landmark {
   id: string;
@@ -169,6 +170,63 @@ const landmarksData: Record<string, Landmark[]> = {
   mazu: buddhistMapLandmarks,
 };
 
+const heritageLandmarks: Landmark[] = [
+  {
+    id: "heritage-nanhai-putuo",
+    name: "南海普陀",
+    era: "唐宋至今",
+    description: "海天佛国意象中的观音道场，象征海上信仰与朝圣传统。",
+    significance: "体现海洋文化语境下的观音信仰传播与民间护佑精神。",
+    location: "舟山普陀山文化意象",
+    coordinates: { x: 71, y: 12 },
+  },
+  {
+    id: "heritage-nanhai-guanyin",
+    name: "南海观音",
+    era: "民间信仰",
+    description: "观音立于海天之间的核心视觉母题，寓意慈悲济世。",
+    significance: "连接佛教经典精神与大众审美记忆的重要图像符号。",
+    location: "海上丝路文化意象",
+    coordinates: { x: 39, y: 9 },
+  },
+  {
+    id: "heritage-changan",
+    name: "长安雁塔",
+    era: "唐代",
+    description: "长安译经与传播中心的重要地标，见证佛教中国化进程。",
+    significance: "承载中外文化交流与经典传播的历史记忆。",
+    location: "陕西西安",
+    coordinates: { x: 31, y: 34 },
+  },
+  {
+    id: "heritage-longmen",
+    name: "龙门石窟",
+    era: "北魏至唐",
+    description: "中国石窟艺术高峰之一，展现多朝代造像风格演变。",
+    significance: "见证佛教艺术本土化与工艺体系成熟。",
+    location: "河南洛阳",
+    coordinates: { x: 48, y: 53 },
+  },
+  {
+    id: "heritage-potala",
+    name: "布达拉宫",
+    era: "清代重建",
+    description: "雪域高原宗教与政治文化复合地标，具有强烈精神象征。",
+    significance: "体现汉藏文化交流脉络与高原佛教建筑成就。",
+    location: "西藏拉萨",
+    coordinates: { x: 47, y: 72 },
+  },
+  {
+    id: "heritage-wutai",
+    name: "五台金顶",
+    era: "唐宋至今",
+    description: "文殊信仰核心圣境之一，山岳佛教传统延续至今。",
+    significance: "体现朝山传统、宗派融合与信仰共同体记忆。",
+    location: "山西五台山",
+    coordinates: { x: 46, y: 89 },
+  },
+];
+
 const timelineData: Record<string, { era: string; period: string; event: string }[]> = {
   buddhist: [
     { era: "东汉", period: "67年", event: "佛教传入中国" },
@@ -195,6 +253,7 @@ export default function CultureMap() {
   const [, setLocation] = useLocation();
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [activeEra, setActiveEra] = useState<number>(0);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
     if (!culture || !theme) setLocation("/");
@@ -204,6 +263,13 @@ export default function CultureMap() {
 
   const landmarks = landmarksData[culture] || [];
   const timeline = timelineData[culture] || [];
+
+  const handleLandmarkClick = (landmark: Landmark) => {
+    setSelectedLandmark(landmark);
+    if (landmark.id === "heritage-longmen") {
+      setIsVideoModalOpen(true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-parchment)]">
@@ -232,6 +298,30 @@ export default function CultureMap() {
             </h3>
             <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
               <img src={cultureLongImage} alt="文化长图" className="w-full h-auto block" />
+              {heritageLandmarks.map((landmark) => (
+                <motion.button
+                  key={landmark.id}
+                  className="absolute z-20 group -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
+                  onClick={() => handleLandmarkClick(landmark)}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div
+                    className="absolute inset-0 rounded-full animate-ping opacity-35"
+                    style={{ backgroundColor: theme.primary, width: "22px", height: "22px", margin: "-5px" }}
+                  />
+                  <div
+                    className={`w-3.5 h-3.5 rounded-full border-2 border-white shadow-lg transition-all ${
+                      selectedLandmark?.id === landmark.id ? "scale-125" : ""
+                    }`}
+                    style={{ backgroundColor: theme.primary }}
+                  />
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-[11px] text-[var(--color-ink-dark)] opacity-0 group-hover:opacity-100 transition-opacity bg-white/85 px-2 py-0.5 rounded-sm">
+                    {landmark.name}
+                  </div>
+                </motion.button>
+              ))}
             </div>
           </motion.div>
 
@@ -254,7 +344,7 @@ export default function CultureMap() {
                   key={landmark.id}
                   className="absolute z-10 group -translate-x-1/2 -translate-y-1/2"
                   style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
-                  onClick={() => setSelectedLandmark(landmark)}
+                  onClick={() => handleLandmarkClick(landmark)}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -354,13 +444,54 @@ export default function CultureMap() {
                   <div className="font-display text-4xl opacity-20 mb-4" style={{ color: theme.primary }}>
                     {culture === "buddhist" ? "莲" : culture === "taoist" ? "道" : "海"}
                   </div>
-                  <p className="font-sans text-sm text-[var(--color-ink-light)]">点击地图上的地标</p>
+                  <p className="font-sans text-sm text-[var(--color-ink-light)]">点击地图或文脉传承亮点</p>
                   <p className="font-sans text-xs text-[var(--color-ink-light)] mt-1">查看详细文化解读</p>
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
         </div>
+
+        <AnimatePresence>
+          {isVideoModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/65 backdrop-blur-sm flex items-center justify-center px-4"
+              onClick={() => setIsVideoModalOpen(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98, y: 8 }}
+                transition={{ duration: 0.25 }}
+                className="w-full max-w-4xl glass-card rounded-sm p-4 border border-white/20"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)]">
+                    龙门石窟 · 乐山大佛定点游览
+                  </h4>
+                  <button
+                    className="px-2 py-1 text-xs rounded-sm border border-[var(--color-mountain-near)]/30 text-[var(--color-mountain-near)] hover:bg-[var(--color-mountain-near)]/10"
+                    onClick={() => setIsVideoModalOpen(false)}
+                  >
+                    关闭
+                  </button>
+                </div>
+                <video
+                  className="w-full h-auto rounded-sm bg-black"
+                  src={leshanBuddhaTourVideo}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
