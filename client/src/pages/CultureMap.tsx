@@ -25,7 +25,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "中国佛教名山之一，普贤菩萨道场。",
       significance: "佛教朝圣与修行中心。",
       location: "四川乐山",
-      coordinates: { x: 25, y: 35 },
+      coordinates: { x: 43, y: 57 },
     },
     {
       id: "leshan",
@@ -34,7 +34,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "世界最大的石刻弥勒佛坐像。",
       significance: "佛教艺术与工程奇迹。",
       location: "四川乐山",
-      coordinates: { x: 30, y: 45 },
+      coordinates: { x: 41, y: 54 },
     },
     {
       id: "nanputuo",
@@ -43,7 +43,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "闽南佛教重地，依山面海。",
       significance: "闽南佛教文化中心。",
       location: "福建厦门",
-      coordinates: { x: 72, y: 65 },
+      coordinates: { x: 74, y: 62 },
     },
   ],
   taoist: [
@@ -54,7 +54,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "道教发源地之一，山林幽深。",
       significance: "天师道重要道场。",
       location: "四川都江堰",
-      coordinates: { x: 22, y: 30 },
+      coordinates: { x: 34, y: 49 },
     },
     {
       id: "heming",
@@ -63,7 +63,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "五斗米道发端之地。",
       significance: "早期道教传播核心。",
       location: "四川大邑",
-      coordinates: { x: 20, y: 38 },
+      coordinates: { x: 32, y: 52 },
     },
     {
       id: "dujiangyan",
@@ -72,7 +72,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "顺应自然的古代水利工程。",
       significance: "道法自然的工程体现。",
       location: "四川都江堰",
-      coordinates: { x: 24, y: 32 },
+      coordinates: { x: 33, y: 47 },
     },
   ],
   mazu: [
@@ -83,7 +83,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "妈祖信俗发源地。",
       significance: "妈祖祖庙所在地。",
       location: "福建莆田",
-      coordinates: { x: 65, y: 50 },
+      coordinates: { x: 71, y: 56 },
     },
     {
       id: "tianhou",
@@ -92,7 +92,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "海上信俗沿海传播的重要节点。",
       significance: "海丝文化见证。",
       location: "福建泉州",
-      coordinates: { x: 70, y: 58 },
+      coordinates: { x: 70, y: 61 },
     },
     {
       id: "xianliang",
@@ -101,7 +101,7 @@ const landmarksData: Record<string, Landmark[]> = {
       description: "林默娘诞生地。",
       significance: "妈祖文化象征地。",
       location: "福建莆田",
-      coordinates: { x: 63, y: 48 },
+      coordinates: { x: 72, y: 57 },
     },
   ],
 };
@@ -182,14 +182,14 @@ export default function CultureMap() {
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
             </h3>
 
-            <div className="relative w-full h-full min-h-[40vh] rounded-sm overflow-hidden">
-              <img src={buddhistMapImage} alt="佛教地图" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black/10" />
+            <div className="relative w-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-[#f6efe0]">
+              <img src={buddhistMapImage} alt="佛教地图" className="w-full h-auto block" />
+              <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
               {landmarks.map((landmark) => (
                 <motion.button
                   key={landmark.id}
-                  className="absolute z-10 group"
+                  className="absolute z-10 group -translate-x-1/2 -translate-y-1/2"
                   style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
                   onClick={() => setSelectedLandmark(landmark)}
                   whileHover={{ scale: 1.2 }}
