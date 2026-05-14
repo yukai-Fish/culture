@@ -227,7 +227,7 @@ export default function CultureMap() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-3 glass-card rounded-sm p-4 overflow-y-auto custom-scrollbar max-h-[60vh]"
           >
-            <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4 sticky top-0 bg-[var(--color-parchment)]/80 backdrop-blur-sm py-2">
+            <h3 className="sticky top-0 z-30 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3 bg-[var(--color-parchment)]/95 backdrop-blur-sm">
               文脉传承
             </h3>
             <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
@@ -239,9 +239,9 @@ export default function CultureMap() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-5 glass-card rounded-sm p-4 relative overflow-hidden min-h-[50vh]"
+            className="lg:col-span-5 glass-card rounded-sm p-4 relative min-h-[60vh] flex flex-col"
           >
-            <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
+            <h3 className="h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
             </h3>
 
@@ -268,6 +268,44 @@ export default function CultureMap() {
                   </div>
                 </motion.button>
               ))}
+            </div>
+
+            <div className="mt-auto pt-4">
+              <div className="ink-divider mb-3" />
+              <h3 className="font-serif text-xs font-semibold text-[var(--color-mountain-near)] mb-2">
+                历史轴 · {theme.name}在中国的发展
+              </h3>
+              <div className="relative overflow-x-auto custom-scrollbar pb-1">
+                <div className="flex items-center min-w-max pr-2">
+                  <div
+                    className="absolute left-0 right-0 h-px top-[17px]"
+                    style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }}
+                  />
+
+                  {timeline.map((item, index) => (
+                    <motion.button
+                      key={index}
+                      className={`relative flex flex-col items-center px-4 py-1 group transition-all ${
+                        activeEra === index ? "opacity-100" : "opacity-55 hover:opacity-85"
+                      }`}
+                      onClick={() => setActiveEra(index)}
+                      whileHover={{ y: -1 }}
+                    >
+                      <div
+                        className={`w-2.5 h-2.5 rounded-full border-2 mb-1.5 transition-all ${activeEra === index ? "scale-125" : ""}`}
+                        style={{
+                          borderColor: theme.primary,
+                          backgroundColor: activeEra === index ? theme.primary : "transparent",
+                        }}
+                      />
+                      <span className="font-serif text-[11px] font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
+                        {item.era}
+                      </span>
+                      <span className="font-sans text-[10px] text-[var(--color-ink-light)] leading-none mt-0.5">{item.period}</span>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -323,43 +361,6 @@ export default function CultureMap() {
             </AnimatePresence>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="max-w-7xl mx-auto mt-6 glass-card rounded-sm p-4"
-        >
-          <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">历史轴 · {theme.name}在中国的发展</h3>
-          <div className="relative overflow-x-auto custom-scrollbar pb-2">
-            <div className="flex items-center min-w-max">
-              <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }} />
-
-              {timeline.map((item, index) => (
-                <motion.button
-                  key={index}
-                  className={`relative flex flex-col items-center px-6 py-2 group transition-all ${
-                    activeEra === index ? "opacity-100" : "opacity-50 hover:opacity-80"
-                  }`}
-                  onClick={() => setActiveEra(index)}
-                  whileHover={{ y: -2 }}
-                >
-                  <div
-                    className={`w-3 h-3 rounded-full border-2 mb-2 transition-all ${activeEra === index ? "scale-150" : ""}`}
-                    style={{
-                      borderColor: theme.primary,
-                      backgroundColor: activeEra === index ? theme.primary : "transparent",
-                    }}
-                  />
-                  <span className="font-serif text-xs font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
-                    {item.era}
-                  </span>
-                  <span className="font-sans text-[10px] text-[var(--color-ink-light)] mt-0.5">{item.period}</span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
