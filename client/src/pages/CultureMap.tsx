@@ -291,37 +291,39 @@ export default function CultureMap() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 glass-card rounded-sm p-4 overflow-y-auto custom-scrollbar max-h-[60vh]"
+            className="lg:col-span-3 glass-card rounded-sm p-4 h-[60vh] flex flex-col"
           >
-            <h3 className="sticky top-0 z-30 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3 bg-[var(--color-parchment)]/95 backdrop-blur-sm">
+            <h3 className="shrink-0 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文脉传承
             </h3>
-            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
-              <img src={cultureLongImage} alt="文化长图" className="w-full h-auto block" />
-              {heritageLandmarks.map((landmark) => (
-                <motion.button
-                  key={landmark.id}
-                  className="absolute z-20 group -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
-                  onClick={() => handleLandmarkClick(landmark)}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div
-                    className="absolute inset-0 rounded-full animate-ping opacity-35"
-                    style={{ backgroundColor: theme.primary, width: "22px", height: "22px", margin: "-5px" }}
-                  />
-                  <div
-                    className={`w-3.5 h-3.5 rounded-full border-2 border-white shadow-lg transition-all ${
-                      selectedLandmark?.id === landmark.id ? "scale-125" : ""
-                    }`}
-                    style={{ backgroundColor: theme.primary }}
-                  />
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-[11px] text-[var(--color-ink-dark)] opacity-0 group-hover:opacity-100 transition-opacity bg-white/85 px-2 py-0.5 rounded-sm">
-                    {landmark.name}
-                  </div>
-                </motion.button>
-              ))}
+            <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
+              <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
+                <img src={cultureLongImage} alt="文化长图" className="w-full h-auto block" />
+                {heritageLandmarks.map((landmark) => (
+                  <motion.button
+                    key={landmark.id}
+                    className="absolute z-20 group -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
+                    onClick={() => handleLandmarkClick(landmark)}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div
+                      className="absolute inset-0 rounded-full animate-ping opacity-35"
+                      style={{ backgroundColor: theme.primary, width: "22px", height: "22px", margin: "-5px" }}
+                    />
+                    <div
+                      className={`w-3.5 h-3.5 rounded-full border-2 border-white shadow-lg transition-all ${
+                        selectedLandmark?.id === landmark.id ? "scale-125" : ""
+                      }`}
+                      style={{ backgroundColor: theme.primary }}
+                    />
+                    <div className="absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-[11px] text-[var(--color-ink-dark)] opacity-0 group-hover:opacity-100 transition-opacity bg-white/85 px-2 py-0.5 rounded-sm">
+                      {landmark.name}
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -466,22 +468,18 @@ export default function CultureMap() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98, y: 8 }}
                 transition={{ duration: 0.25 }}
-                className="w-full max-w-4xl glass-card rounded-sm p-4 border border-white/20"
+                className="relative w-full max-w-2xl glass-card rounded-sm p-3 border border-white/20"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)]">
-                    龙门石窟 · 乐山大佛定点游览
-                  </h4>
-                  <button
-                    className="px-2 py-1 text-xs rounded-sm border border-[var(--color-mountain-near)]/30 text-[var(--color-mountain-near)] hover:bg-[var(--color-mountain-near)]/10"
-                    onClick={() => setIsVideoModalOpen(false)}
-                  >
-                    关闭
-                  </button>
-                </div>
+                <button
+                  className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-black/55 text-white text-lg leading-none hover:bg-black/70 transition-colors"
+                  onClick={() => setIsVideoModalOpen(false)}
+                  aria-label="关闭视频"
+                >
+                  ×
+                </button>
                 <video
-                  className="w-full h-auto rounded-sm bg-black"
+                  className="w-full max-h-[70vh] rounded-sm bg-black object-contain"
                   src={leshanBuddhaTourVideo}
                   controls
                   autoPlay
