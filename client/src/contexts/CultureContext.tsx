@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 export type CultureType = "buddhist" | "taoist" | "mazu" | null;
 
@@ -12,6 +12,8 @@ interface CultureTheme {
   description: string;
 }
 
+const CULTURE_STORAGE_KEY = "selected_culture";
+
 const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
   buddhist: {
     primary: "#C5A55A",
@@ -19,7 +21,7 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#8B6914",
     gradient: "from-amber-50 via-yellow-50 to-pink-50",
     name: "佛教",
-    icon: "🪷",
+    icon: "莲",
     description: "慈悲为怀，普度众生",
   },
   taoist: {
@@ -28,7 +30,7 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#2D5A3E",
     gradient: "from-green-50 via-emerald-50 to-stone-50",
     name: "道教",
-    icon: "☯",
+    icon: "道",
     description: "道法自然，天人合一",
   },
   mazu: {
@@ -37,7 +39,7 @@ const cultureThemes: Record<Exclude<CultureType, null>, CultureTheme> = {
     accent: "#1E4D6B",
     gradient: "from-blue-50 via-cyan-50 to-sky-50",
     name: "妈祖",
-    icon: "⛵",
+    icon: "海",
     description: "护佑平安，海上女神",
   },
 };
@@ -51,8 +53,29 @@ interface CultureContextType {
 
 const CultureContext = createContext<CultureContextType | undefined>(undefined);
 
+function isCultureType(value: string | null): value is Exclude<CultureType, null> {
+  return value === "buddhist" || value === "taoist" || value === "mazu";
+}
+
 export function CultureProvider({ children }: { children: ReactNode }) {
-  const [culture, setCulture] = useState<CultureType>(null);
+  const [culture, setCultureState] = useState<CultureType>(() => {
+    if (typeof window === "undefined") return null;
+    const saved = localStorage.getItem(CULTURE_STORAGE_KEY);
+    return isCultureType(saved) ? saved : null;
+  });
+
+  const setCulture = (nextCulture: CultureType) => {
+    setCultureState(nextCulture);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (culture) {
+      localStorage.setItem(CULTURE_STORAGE_KEY, culture);
+    } else {
+      localStorage.removeItem(CULTURE_STORAGE_KEY);
+    }
+  }, [culture]);
 
   const theme = culture ? cultureThemes[culture] : null;
 
