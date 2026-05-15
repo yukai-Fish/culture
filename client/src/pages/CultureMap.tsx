@@ -442,36 +442,36 @@ export default function CultureMap() {
 
               <div className="pt-4">
                 <div className="ink-divider mb-3" />
-                <h3 className="font-serif text-xs font-semibold text-[var(--color-mountain-near)] mb-2">
+                <h3 className="font-serif text-base md:text-lg font-semibold text-[var(--color-mountain-near)] mb-2.5">
                   历史轴 · {theme.name}在中国的发展
                 </h3>
                 <div className="relative overflow-x-auto custom-scrollbar pb-1">
                   <div className="flex items-center min-w-max pr-2">
                     <div
-                      className="absolute left-0 right-0 h-px top-[17px]"
+                      className="absolute left-0 right-0 h-px top-[20px]"
                       style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }}
                     />
 
                     {timeline.map((item, index) => (
                       <motion.button
                         key={index}
-                        className={`relative flex flex-col items-center px-4 py-1 group transition-all ${
+                        className={`relative flex flex-col items-center px-5 py-1 group transition-all ${
                           activeEra === index ? "opacity-100" : "opacity-55 hover:opacity-85"
                         }`}
                         onClick={() => setActiveEra(index)}
                         whileHover={{ y: -1 }}
                       >
                         <div
-                          className={`w-2.5 h-2.5 rounded-full border-2 mb-1.5 transition-all ${activeEra === index ? "scale-125" : ""}`}
+                          className={`w-3.5 h-3.5 rounded-full border-2 mb-2 transition-all ${activeEra === index ? "scale-125" : ""}`}
                           style={{
                             borderColor: theme.primary,
                             backgroundColor: activeEra === index ? theme.primary : "transparent",
                           }}
                         />
-                        <span className="font-serif text-[11px] font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
+                        <span className="font-serif text-[17px] leading-none font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
                           {item.era}
                         </span>
-                        <span className="font-sans text-[10px] text-[var(--color-ink-light)] leading-none mt-0.5">{item.period}</span>
+                        <span className="font-sans text-[14px] text-[var(--color-ink-light)] leading-none mt-1">{item.period}</span>
                       </motion.button>
                     ))}
                   </div>
