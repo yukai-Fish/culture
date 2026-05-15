@@ -541,7 +541,7 @@ export default function CultureMap() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="space-y-4"
+                    className="h-full flex flex-col"
                   >
                     <div className="mb-1">
                       <h4 className="font-display text-2xl" style={{ color: theme.primary }}>{selectedLandmark.name}</h4>
@@ -553,16 +553,17 @@ export default function CultureMap() {
                       </div>
                     </div>
 
-                    <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
-                      <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">历史介绍</h5>
-                      <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.description}</p>
-                    </div>
+                    <div className="mt-auto space-y-4">
+                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
+                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">历史介绍</h5>
+                        <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.description}</p>
+                      </div>
 
-                    <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
-                      <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">文化意义</h5>
-                      <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.significance}</p>
+                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
+                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">文化意义</h5>
+                        <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.significance}</p>
+                      </div>
                     </div>
-
                   </motion.div>
                 ) : (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col justify-between">
