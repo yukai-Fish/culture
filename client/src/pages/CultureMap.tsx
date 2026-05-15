@@ -297,32 +297,30 @@ const defaultVisualByCulture: Record<string, string> = {
   mazu: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/mazu-scene-FfuCytmAEKRrHxKejt8WWb.webp",
 };
 
-const landmarkPhotoBase = `${import.meta.env.BASE_URL}landmark-photos/`;
-
-const landmarkPhotoById: Record<string, string> = {
-  "qiuci-caves": `${landmarkPhotoBase}qiuci-caves.jpg`,
-  dunhuang: `${landmarkPhotoBase}dunhuang.jpg`,
-  "chang-an": `${landmarkPhotoBase}chang-an.jpg`,
-  luoyang: `${landmarkPhotoBase}luoyang.jpg`,
-  yungang: `${landmarkPhotoBase}yungang.jpg`,
-  wutai: `${landmarkPhotoBase}wutai.jpg`,
-  beijing: `${landmarkPhotoBase}beijing.jpg`,
-  "lingshan-caves": `${landmarkPhotoBase}lingshan-caves.jpg`,
-  chengdu: `${landmarkPhotoBase}chengdu.jpg`,
-  emei: `${landmarkPhotoBase}emei.jpg`,
-  dazu: `${landmarkPhotoBase}dazu.jpg`,
-  tiantai: `${landmarkPhotoBase}tiantai.jpg`,
-  nanjing: `${landmarkPhotoBase}nanjing.jpg`,
-  guangzhou: `${landmarkPhotoBase}guangzhou.jpg`,
-  putuo: `${landmarkPhotoBase}putuo.jpg`,
-  "nanhai-guanyin": `${landmarkPhotoBase}nanhai-guanyin.jpg`,
-  "heritage-nanhai-putuo": `${landmarkPhotoBase}heritage-nanhai-putuo.jpg`,
-  "heritage-nanhai-guanyin": `${landmarkPhotoBase}heritage-nanhai-guanyin.jpg`,
-  "heritage-changan": `${landmarkPhotoBase}heritage-changan.jpg`,
-  "heritage-longmen": `${landmarkPhotoBase}heritage-longmen.jpg`,
-  "heritage-leshan-buddha": `${landmarkPhotoBase}heritage-leshan-buddha.jpg`,
-  "heritage-potala": `${landmarkPhotoBase}heritage-potala.jpg`,
-  "heritage-wutai": `${landmarkPhotoBase}heritage-wutai.jpg`,
+const landmarkWikiTitleById: Record<string, string> = {
+  "qiuci-caves": "Kizil_Caves",
+  dunhuang: "Mogao_Caves",
+  "chang-an": "Giant_Wild_Goose_Pagoda",
+  luoyang: "White_Horse_Temple",
+  yungang: "Yungang_Grottoes",
+  wutai: "Mount_Wutai",
+  beijing: "Miaoying_Temple",
+  "lingshan-caves": "Maijishan_Grottoes",
+  chengdu: "Zhaojue_Temple",
+  emei: "Mount_Emei",
+  dazu: "Dazu_Rock_Carvings",
+  tiantai: "Guoqing_Temple",
+  nanjing: "Qixia_Temple",
+  guangzhou: "Guangxiao_Temple_(Guangzhou)",
+  putuo: "Mount_Putuo",
+  "nanhai-guanyin": "Guanyin_of_Nanshan",
+  "heritage-nanhai-putuo": "Mount_Putuo",
+  "heritage-nanhai-guanyin": "Guanyin_of_Nanshan",
+  "heritage-changan": "Giant_Wild_Goose_Pagoda",
+  "heritage-longmen": "Longmen_Grottoes",
+  "heritage-leshan-buddha": "Leshan_Giant_Buddha",
+  "heritage-potala": "Potala_Palace",
+  "heritage-wutai": "Mount_Wutai",
 };
 
 export default function CultureMap() {
@@ -330,12 +328,64 @@ export default function CultureMap() {
   const [, setLocation] = useLocation();
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [activeEra, setActiveEra] = useState<number>(0);
+  const [landmarkPhotoCache, setLandmarkPhotoCache] = useState<Record<string, string | null>>({});
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [modalVideoSrc, setModalVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (!culture || !theme) setLocation("/");
   }, [culture, theme, setLocation]);
+
+  useEffect(() => {
+    const landmarkId = selectedLandmark?.id;
+    if (!landmarkId) return;
+    if (landmarkPhotoCache[landmarkId] !== undefined) return;
+
+    const wikiTitle = landmarkWikiTitleById[landmarkId];
+    if (!wikiTitle) {
+      setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: null }));
+      return;
+    }
+
+    let cancelled = false;
+    const resolvePhoto = async () => {
+      try {
+        const apiUrl =
+          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages` +
+          `&piprop=thumbnail&pithumbsize=1600&titles=${encodeURIComponent(wikiTitle)}&origin=*`;
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        const pages = Object.values((data?.query?.pages || {}) as Record<string, { thumbnail?: { source?: string } }>);
+        const thumbnail = pages[0]?.thumbnail?.source;
+
+        if (!cancelled && thumbnail) {
+          setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: thumbnail }));
+          return;
+        }
+      } catch {}
+
+      try {
+        const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`;
+        const res = await fetch(summaryUrl);
+        const data = await res.json();
+        const thumbnail = data?.thumbnail?.source as string | undefined;
+
+        if (!cancelled && thumbnail) {
+          setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: thumbnail }));
+          return;
+        }
+      } catch {}
+
+      if (!cancelled) {
+        setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: null }));
+      }
+    };
+
+    resolvePhoto();
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedLandmark?.id, landmarkPhotoCache]);
 
   if (!culture || !theme) return null;
 
@@ -364,7 +414,7 @@ export default function CultureMap() {
   };
 
   const previewVisual = selectedLandmark
-    ? (landmarkPhotoById[selectedLandmark.id] ?? defaultVisualByCulture[culture])
+    ? (landmarkPhotoCache[selectedLandmark.id] ?? defaultVisualByCulture[culture])
     : defaultVisualByCulture[culture];
 
   return (
@@ -526,7 +576,7 @@ export default function CultureMap() {
             className="lg:col-span-4 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
-            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-56 md:h-64 lg:h-[19rem] shrink-0">
+            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-64 md:h-80 lg:h-[61%] lg:min-h-[430px] shrink-0">
               <img
                 src={previewVisual}
                 alt={selectedLandmark ? `${selectedLandmark.name}实景图` : `${theme.name}全景图`}
