@@ -297,30 +297,30 @@ const defaultVisualByCulture: Record<string, string> = {
   mazu: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/mazu-scene-FfuCytmAEKRrHxKejt8WWb.webp",
 };
 
-const landmarkWikiTitleById: Record<string, string> = {
-  "qiuci-caves": "Kizil_Caves",
-  dunhuang: "Mogao_Caves",
-  "chang-an": "Giant_Wild_Goose_Pagoda",
-  luoyang: "White_Horse_Temple",
-  yungang: "Yungang_Grottoes",
-  wutai: "Mount_Wutai",
-  beijing: "Miaoying_Temple",
-  "lingshan-caves": "Maijishan_Grottoes",
-  chengdu: "Zhaojue_Temple",
-  emei: "Mount_Emei",
-  dazu: "Dazu_Rock_Carvings",
-  tiantai: "Guoqing_Temple",
-  nanjing: "Qixia_Temple",
-  guangzhou: "Guangxiao_Temple_(Guangzhou)",
-  putuo: "Mount_Putuo",
-  "nanhai-guanyin": "Guanyin_of_Nanshan",
-  "heritage-nanhai-putuo": "Mount_Putuo",
-  "heritage-nanhai-guanyin": "Guanyin_of_Nanshan",
-  "heritage-changan": "Giant_Wild_Goose_Pagoda",
-  "heritage-longmen": "Longmen_Grottoes",
-  "heritage-leshan-buddha": "Leshan_Giant_Buddha",
-  "heritage-potala": "Potala_Palace",
-  "heritage-wutai": "Mount_Wutai",
+const landmarkPhotoById: Record<string, string> = {
+  "qiuci-caves": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kizil_sky.jpg/1280px-Kizil_sky.jpg",
+  dunhuang: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Mogao_Caves_%2854376969262%29.jpg/1280px-Mogao_Caves_%2854376969262%29.jpg",
+  "chang-an": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Giant_Wild_Goose_Pagoda.jpg/1280px-Giant_Wild_Goose_Pagoda.jpg",
+  luoyang: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/27467-Luoyang_%2849085730123%29.jpg/1280px-27467-Luoyang_%2849085730123%29.jpg",
+  yungang: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/61292-Yungang-Grottoes_%2828498548881%29.jpg/1280px-61292-Yungang-Grottoes_%2828498548881%29.jpg",
+  wutai: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Mount_Wutai.JPG/1280px-Mount_Wutai.JPG",
+  beijing: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Miaoying_Temple_8.jpg/1280px-Miaoying_Temple_8.jpg",
+  "lingshan-caves": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Majishan_entire_hill_20090226.jpg/1280px-Majishan_entire_hill_20090226.jpg",
+  chengdu: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Zhaojue_temple.jpg/1280px-Zhaojue_temple.jpg",
+  emei: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/%E5%B3%A8%E7%9C%89%E5%B1%B1%E9%A3%8E%E6%99%AF%E5%8C%BA_Mount_Emei_Scenic_Area_07.jpg/1280px-%E5%B3%A8%E7%9C%89%E5%B1%B1%E9%A3%8E%E6%99%AF%E5%8C%BA_Mount_Emei_Scenic_Area_07.jpg",
+  dazu: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Dazu_2007_685_full_view.jpg/1280px-Dazu_2007_685_full_view.jpg",
+  tiantai: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Guoqing_Temple%2C_2014-12-27_23.JPG/1280px-Guoqing_Temple%2C_2014-12-27_23.JPG",
+  nanjing: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Pilu_Hall.jpg/1280px-Pilu_Hall.jpg",
+  guangzhou: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Guangzhou_Guangxiao_Si_2012.11.19_13-31-15.jpg/1280px-Guangzhou_Guangxiao_Si_2012.11.19_13-31-15.jpg",
+  putuo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Putuo_Shan_2006_3.JPG/1280px-Putuo_Shan_2006_3.JPG",
+  "nanhai-guanyin": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/HainanSanya2.jpg/1280px-HainanSanya2.jpg",
+  "heritage-nanhai-putuo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Putuo_Shan_2006_3.JPG/1280px-Putuo_Shan_2006_3.JPG",
+  "heritage-nanhai-guanyin": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/HainanSanya2.jpg/1280px-HainanSanya2.jpg",
+  "heritage-changan": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Giant_Wild_Goose_Pagoda.jpg/1280px-Giant_Wild_Goose_Pagoda.jpg",
+  "heritage-longmen": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/27427-Luoyang_%2849067744628%29.jpg/1280px-27427-Luoyang_%2849067744628%29.jpg",
+  "heritage-leshan-buddha": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Leshan_Buddha_Statue_View.JPG/1280px-Leshan_Buddha_Statue_View.JPG",
+  "heritage-potala": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Potala_Palace_HQ.jpg/1280px-Potala_Palace_HQ.jpg",
+  "heritage-wutai": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Mount_Wutai.JPG/1280px-Mount_Wutai.JPG",
 };
 
 export default function CultureMap() {
@@ -328,64 +328,12 @@ export default function CultureMap() {
   const [, setLocation] = useLocation();
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [activeEra, setActiveEra] = useState<number>(0);
-  const [landmarkPhotoCache, setLandmarkPhotoCache] = useState<Record<string, string | null>>({});
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [modalVideoSrc, setModalVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (!culture || !theme) setLocation("/");
   }, [culture, theme, setLocation]);
-
-  useEffect(() => {
-    const landmarkId = selectedLandmark?.id;
-    if (!landmarkId) return;
-    if (landmarkPhotoCache[landmarkId] !== undefined) return;
-
-    const wikiTitle = landmarkWikiTitleById[landmarkId];
-    if (!wikiTitle) {
-      setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: null }));
-      return;
-    }
-
-    let cancelled = false;
-    const resolvePhoto = async () => {
-      try {
-        const apiUrl =
-          `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages` +
-          `&piprop=thumbnail&pithumbsize=1600&titles=${encodeURIComponent(wikiTitle)}&origin=*`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        const pages = Object.values((data?.query?.pages || {}) as Record<string, { thumbnail?: { source?: string } }>);
-        const thumbnail = pages[0]?.thumbnail?.source;
-
-        if (!cancelled && thumbnail) {
-          setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: thumbnail }));
-          return;
-        }
-      } catch {}
-
-      try {
-        const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`;
-        const res = await fetch(summaryUrl);
-        const data = await res.json();
-        const thumbnail = data?.thumbnail?.source as string | undefined;
-
-        if (!cancelled && thumbnail) {
-          setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: thumbnail }));
-          return;
-        }
-      } catch {}
-
-      if (!cancelled) {
-        setLandmarkPhotoCache((prev) => ({ ...prev, [landmarkId]: null }));
-      }
-    };
-
-    resolvePhoto();
-    return () => {
-      cancelled = true;
-    };
-  }, [selectedLandmark?.id, landmarkPhotoCache]);
 
   if (!culture || !theme) return null;
 
@@ -414,7 +362,7 @@ export default function CultureMap() {
   };
 
   const previewVisual = selectedLandmark
-    ? (landmarkPhotoCache[selectedLandmark.id] ?? defaultVisualByCulture[culture])
+    ? (landmarkPhotoById[selectedLandmark.id] ?? defaultVisualByCulture[culture])
     : defaultVisualByCulture[culture];
 
   return (
@@ -576,7 +524,7 @@ export default function CultureMap() {
             className="lg:col-span-4 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
-            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-64 md:h-80 lg:h-[61%] lg:min-h-[430px] shrink-0">
+            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-64 md:h-80 lg:h-[31rem] shrink-0">
               <img
                 src={previewVisual}
                 alt={selectedLandmark ? `${selectedLandmark.name}实景图` : `${theme.name}全景图`}
