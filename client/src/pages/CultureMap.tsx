@@ -477,7 +477,7 @@ export default function CultureMap() {
                   </div>
                 </div>
                 {activeTimeline && (
-                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-3 md:p-3.5 min-h-[170px] flex flex-col justify-between">
+                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-3 md:p-3.5 min-h-[230px] md:min-h-[250px] flex flex-col justify-between">
                     <p className="font-serif text-sm md:text-base mb-2" style={{ color: theme.primary }}>
                       {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
                     </p>
