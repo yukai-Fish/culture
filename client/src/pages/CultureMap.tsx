@@ -524,7 +524,7 @@ export default function CultureMap() {
             className="lg:col-span-4 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
-            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-56 md:h-64 lg:h-[30rem] shrink-0">
+            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-56 md:h-64 lg:h-[27rem] shrink-0">
               <img
                 src={previewVisual}
                 alt={selectedLandmark ? `${selectedLandmark.name}实景图` : `${theme.name}全景图`}
