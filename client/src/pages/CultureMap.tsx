@@ -5,6 +5,8 @@ import Navigation from "@/components/Navigation";
 import { useLocation } from "wouter";
 import buddhistMapImage from "@/assets/buddhist-map.png";
 import cultureLongImage from "@/assets/culture-long-image.png";
+import leshanBuddhaVideo from "@/assets/leshan-buddha.mp4";
+import longmenCavesVideo from "@/assets/longmen-caves.mp4";
 
 interface Landmark {
   id: string;
@@ -328,6 +330,8 @@ export default function CultureMap() {
   const [, setLocation] = useLocation();
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [activeEra, setActiveEra] = useState<number>(0);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [modalVideoSrc, setModalVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (!culture || !theme) setLocation("/");
@@ -340,8 +344,23 @@ export default function CultureMap() {
   const activeTimeline = timeline[activeEra] || timeline[0];
   const activeInsight = timelineInsights[culture]?.[activeEra] ?? timelineInsights[culture]?.[0];
 
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+    setModalVideoSrc(null);
+  };
+
   const handleLandmarkClick = (landmark: Landmark) => {
     setSelectedLandmark(landmark);
+    if (landmark.id === "heritage-longmen") {
+      setModalVideoSrc(longmenCavesVideo);
+      setIsVideoModalOpen(true);
+      return;
+    }
+    if (landmark.id === "heritage-leshan-buddha") {
+      setModalVideoSrc(leshanBuddhaVideo);
+      setIsVideoModalOpen(true);
+      return;
+    }
   };
 
   const previewVisual = selectedLandmark
@@ -562,6 +581,43 @@ export default function CultureMap() {
             </div>
           </motion.div>
         </div>
+
+        <AnimatePresence>
+          {isVideoModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] bg-black/65 backdrop-blur-sm flex items-center justify-center px-4"
+              onClick={closeVideoModal}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98, y: 8 }}
+                transition={{ duration: 0.25 }}
+                className="relative w-full max-w-2xl glass-card rounded-sm p-3 border border-white/20"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-black/55 text-white text-lg leading-none hover:bg-black/70 transition-colors"
+                  onClick={closeVideoModal}
+                  aria-label="关闭视频"
+                >
+                  ×
+                </button>
+                <video
+                  className="w-full max-h-[70vh] rounded-sm bg-black object-contain"
+                  src={modalVideoSrc || undefined}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>
