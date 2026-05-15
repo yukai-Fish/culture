@@ -324,12 +324,12 @@ export default function CultureMap() {
           <p className="font-serif text-sm text-[var(--color-ink-light)] mt-2">{theme.name}文化 · 时空联动</p>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-[60vh]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 lg:h-[56vh] lg:items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 glass-card rounded-sm p-4 h-[56vh] flex flex-col"
+            className="lg:col-span-3 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="shrink-0 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文脉传承
@@ -369,7 +369,7 @@ export default function CultureMap() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-5 glass-card rounded-sm p-4 relative h-[56vh] flex flex-col overflow-hidden"
+            className="lg:col-span-5 glass-card rounded-sm p-4 relative h-full flex flex-col overflow-hidden"
           >
             <h3 className="h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
@@ -455,7 +455,7 @@ export default function CultureMap() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-4 glass-card rounded-sm p-4 h-[56vh] flex flex-col"
+            className="lg:col-span-4 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
             <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-36 shrink-0">
