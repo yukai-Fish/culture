@@ -23,6 +23,11 @@ interface TimelineEntry {
   detail: string;
 }
 
+interface TimelineInsight {
+  impact: string;
+  route: string;
+}
+
 const buddhistMapLandmarks: Landmark[] = [
   {
     id: "qiuci-caves",
@@ -263,6 +268,27 @@ const timelineData: Record<string, TimelineEntry[]> = {
   ],
 };
 
+const timelineInsights: Record<string, TimelineInsight[]> = {
+  buddhist: [
+    { impact: "奠定经典翻译、僧团制度与礼仪体系基础。", route: "陆上丝路与都城译场并行，逐步向中原腹地扩展。" },
+    { impact: "宗派理论与寺院网络成型，文化影响深入文艺与社会生活。", route: "由长安、洛阳向江南与西南扩散，形成多中心传播格局。" },
+    { impact: "禅修传统与民间信仰结合，佛教日常化表达显著增强。", route: "山林寺院、城市道场与海上交流通道共同推动延续发展。" },
+    { impact: "保护、研究与公众传播协同推进，文化记忆持续激活。", route: "数字化档案、沉浸展示与跨区域联动形成当代传播闭环。" },
+  ],
+  taoist: [
+    { impact: "核心思想完成奠基，影响伦理观与自然观。", route: "经典文本经学术与民间口传并行扩散。" },
+    { impact: "教团结构初步稳定，宗教实践走向制度化。", route: "由中原向地方宫观网络延展，形成区域传承节点。" },
+    { impact: "斋醮仪式、宫观体系与典籍整理同步成熟。", route: "都城与地方互动增强，信众网络覆盖更广。" },
+    { impact: "养生与生态理念进入现代公共文化语境。", route: "通过教育传播、文旅展示与新媒体持续扩散。" },
+  ],
+  mazu: [
+    { impact: "形成以护航祈安为核心的沿海共同信仰。", route: "沿港口与渔村聚落传播，逐步形成祭祀网络。" },
+    { impact: "信俗随海贸与移民网络外溢至更广海域。", route: "跨海航线与商帮节点成为传播主轴。" },
+    { impact: "庙宇体系与地方社会秩序深度耦合。", route: "进香线路与地方祭典构成稳定跨地域联动。" },
+    { impact: "非遗认定后国际认知度与交流频率显著提升。", route: "线上传播、展演活动与学术交流并行推进。" },
+  ],
+};
+
 const defaultVisualByCulture: Record<string, string> = {
   buddhist: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/buddhist-scene-Ux9ui2oiJpqTTUbVNYuwEr.webp",
   taoist: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/taoist-scene-dqe3LQzNw5iLurCF9TiEYw.webp",
@@ -312,6 +338,7 @@ export default function CultureMap() {
   const landmarks = landmarksData[culture] || [];
   const timeline = timelineData[culture] || [];
   const activeTimeline = timeline[activeEra] || timeline[0];
+  const activeInsight = timelineInsights[culture]?.[activeEra] ?? timelineInsights[culture]?.[0];
 
   const handleLandmarkClick = (landmark: Landmark) => {
     setSelectedLandmark(landmark);
@@ -450,13 +477,23 @@ export default function CultureMap() {
                   </div>
                 </div>
                 {activeTimeline && (
-                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
-                    <p className="font-serif text-[11px] mb-1" style={{ color: theme.primary }}>
+                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-3 md:p-3.5 min-h-[170px] flex flex-col justify-between">
+                    <p className="font-serif text-sm md:text-base mb-2" style={{ color: theme.primary }}>
                       {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
                     </p>
-                    <p className="font-sans text-[11px] text-[var(--color-ink-medium)] leading-relaxed">
+                    <p className="font-sans text-sm md:text-[15px] text-[var(--color-ink-medium)] leading-7">
                       {activeTimeline.detail}
                     </p>
+                    {activeInsight && (
+                      <div className="mt-3 pt-2 border-t border-[var(--color-mountain-near)]/10 space-y-1.5">
+                        <p className="font-sans text-[13px] text-[var(--color-ink-dark)]">
+                          阶段影响：{activeInsight.impact}
+                        </p>
+                        <p className="font-sans text-[13px] text-[var(--color-ink-dark)]">
+                          传播脉络：{activeInsight.route}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
