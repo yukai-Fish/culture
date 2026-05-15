@@ -433,8 +433,8 @@ export default function CultureMap() {
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
             </h3>
 
-            <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
-              <div className="relative w-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-[#f6efe0]">
+            <div className="flex-1 min-h-0 flex flex-col pr-1">
+              <div className="relative w-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-[#f6efe0] shrink-0">
                 <img src={buddhistMapImage} alt="佛教地图" className="w-full h-auto block" />
                 <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
@@ -459,7 +459,7 @@ export default function CultureMap() {
                 ))}
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 flex-1 flex flex-col">
                 <div className="ink-divider mb-3" />
                 <h3 className="font-serif text-base md:text-lg font-semibold text-[var(--color-mountain-near)] mb-2.5">
                   历史轴 · {theme.name}在中国的发展
@@ -496,7 +496,7 @@ export default function CultureMap() {
                   </div>
                 </div>
                 {activeTimeline && (
-                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-3 md:p-3.5 min-h-[230px] md:min-h-[250px] flex flex-col justify-between">
+                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-3 md:p-3.5 flex-1 min-h-0 flex flex-col justify-between">
                     <p className="font-serif text-sm md:text-base mb-2" style={{ color: theme.primary }}>
                       {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
                     </p>
