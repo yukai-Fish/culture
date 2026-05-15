@@ -120,6 +120,20 @@ export default function InteractiveExperience() {
 
       <div className="pt-20 pb-8 px-4">
         <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
+          <h1 className="font-display text-4xl md:text-5xl text-[var(--color-mountain-near)]">
+            感应场
+          </h1>
+          <p className="font-serif text-sm text-[var(--color-ink-light)] mt-2">
+            仪式感与心灵解压
+          </p>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -137,20 +151,6 @@ export default function InteractiveExperience() {
               preload="metadata"
             />
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
-        >
-          <h1 className="font-display text-4xl md:text-5xl text-[var(--color-mountain-near)]">
-            感应场
-          </h1>
-          <p className="font-serif text-sm text-[var(--color-ink-light)] mt-2">
-            仪式感与心灵解压
-          </p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
