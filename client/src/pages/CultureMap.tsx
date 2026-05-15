@@ -334,9 +334,9 @@ export default function CultureMap() {
             <h3 className="shrink-0 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文脉传承
             </h3>
-            <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
-              <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
-                <img src={cultureLongImage} alt="文化长图" className="w-full h-auto block" />
+            <div className="flex-1 min-h-0 flex items-center justify-center">
+              <div className="relative h-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-white/40">
+                <img src={cultureLongImage} alt="文化长图" className="h-full w-auto block" />
                 {heritageLandmarks.map((landmark) => (
                   <motion.button
                     key={landmark.id}
@@ -509,15 +509,6 @@ export default function CultureMap() {
                       <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.significance}</p>
                     </div>
 
-                    {activeTimeline && (
-                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
-                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">时代关联</h5>
-                        <p className="font-serif text-[12px] mb-1" style={{ color: theme.primary }}>
-                          {activeTimeline.era} · {activeTimeline.event}
-                        </p>
-                        <p className="font-sans text-xs text-[var(--color-ink-medium)] leading-relaxed">{activeTimeline.detail}</p>
-                      </div>
-                    )}
                   </motion.div>
                 ) : (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col justify-between">
@@ -528,15 +519,6 @@ export default function CultureMap() {
                       <p className="font-sans text-sm text-[var(--color-ink-light)]">点击地图或文脉传承亮点</p>
                       <p className="font-sans text-xs text-[var(--color-ink-light)] mt-1">查看详细文化解读</p>
                     </div>
-                    {activeTimeline && (
-                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5 mt-4">
-                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">当前时间轴提示</h5>
-                        <p className="font-serif text-[12px] mb-1" style={{ color: theme.primary }}>
-                          {activeTimeline.era} · {activeTimeline.event}
-                        </p>
-                        <p className="font-sans text-xs text-[var(--color-ink-medium)] leading-relaxed">{activeTimeline.detail}</p>
-                      </div>
-                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
