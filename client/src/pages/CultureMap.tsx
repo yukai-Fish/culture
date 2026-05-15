@@ -369,83 +369,85 @@ export default function CultureMap() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-5 glass-card rounded-sm p-4 relative min-h-[56vh] flex flex-col"
+            className="lg:col-span-5 glass-card rounded-sm p-4 relative h-[56vh] flex flex-col overflow-hidden"
           >
             <h3 className="h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
             </h3>
 
-            <div className="relative w-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-[#f6efe0]">
-              <img src={buddhistMapImage} alt="佛教地图" className="w-full h-auto block" />
-              <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+            <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
+              <div className="relative w-full rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/10 bg-[#f6efe0]">
+                <img src={buddhistMapImage} alt="佛教地图" className="w-full h-auto block" />
+                <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
-              {landmarks.map((landmark) => (
-                <motion.button
-                  key={landmark.id}
-                  className="absolute z-10 group -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
-                  onClick={() => handleLandmarkClick(landmark)}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div
-                    className="absolute inset-0 rounded-full animate-ping opacity-30"
-                    style={{ backgroundColor: theme.primary, width: "24px", height: "24px", margin: "-4px" }}
-                  />
-                  <div className="w-4 h-4 rounded-full border-2 border-white shadow-lg transition-all" style={{ backgroundColor: theme.primary }} />
-                  <div className="absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-xs text-[var(--color-ink-dark)] opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 px-2 py-1 rounded-sm">
-                    {landmark.name}
-                  </div>
-                </motion.button>
-              ))}
-            </div>
-
-            <div className="mt-auto pt-4">
-              <div className="ink-divider mb-3" />
-              <h3 className="font-serif text-xs font-semibold text-[var(--color-mountain-near)] mb-2">
-                历史轴 · {theme.name}在中国的发展
-              </h3>
-              <div className="relative overflow-x-auto custom-scrollbar pb-1">
-                <div className="flex items-center min-w-max pr-2">
-                  <div
-                    className="absolute left-0 right-0 h-px top-[17px]"
-                    style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }}
-                  />
-
-                  {timeline.map((item, index) => (
-                    <motion.button
-                      key={index}
-                      className={`relative flex flex-col items-center px-4 py-1 group transition-all ${
-                        activeEra === index ? "opacity-100" : "opacity-55 hover:opacity-85"
-                      }`}
-                      onClick={() => setActiveEra(index)}
-                      whileHover={{ y: -1 }}
-                    >
-                      <div
-                        className={`w-2.5 h-2.5 rounded-full border-2 mb-1.5 transition-all ${activeEra === index ? "scale-125" : ""}`}
-                        style={{
-                          borderColor: theme.primary,
-                          backgroundColor: activeEra === index ? theme.primary : "transparent",
-                        }}
-                      />
-                      <span className="font-serif text-[11px] font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
-                        {item.era}
-                      </span>
-                      <span className="font-sans text-[10px] text-[var(--color-ink-light)] leading-none mt-0.5">{item.period}</span>
-                    </motion.button>
-                  ))}
-                </div>
+                {landmarks.map((landmark) => (
+                  <motion.button
+                    key={landmark.id}
+                    className="absolute z-10 group -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: `${landmark.coordinates.x}%`, top: `${landmark.coordinates.y}%` }}
+                    onClick={() => handleLandmarkClick(landmark)}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div
+                      className="absolute inset-0 rounded-full animate-ping opacity-30"
+                      style={{ backgroundColor: theme.primary, width: "24px", height: "24px", margin: "-4px" }}
+                    />
+                    <div className="w-4 h-4 rounded-full border-2 border-white shadow-lg transition-all" style={{ backgroundColor: theme.primary }} />
+                    <div className="absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap font-serif text-xs text-[var(--color-ink-dark)] opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 px-2 py-1 rounded-sm">
+                      {landmark.name}
+                    </div>
+                  </motion.button>
+                ))}
               </div>
-              {activeTimeline && (
-                <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
-                  <p className="font-serif text-[11px] mb-1" style={{ color: theme.primary }}>
-                    {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
-                  </p>
-                  <p className="font-sans text-[11px] text-[var(--color-ink-medium)] leading-relaxed">
-                    {activeTimeline.detail}
-                  </p>
+
+              <div className="pt-4">
+                <div className="ink-divider mb-3" />
+                <h3 className="font-serif text-xs font-semibold text-[var(--color-mountain-near)] mb-2">
+                  历史轴 · {theme.name}在中国的发展
+                </h3>
+                <div className="relative overflow-x-auto custom-scrollbar pb-1">
+                  <div className="flex items-center min-w-max pr-2">
+                    <div
+                      className="absolute left-0 right-0 h-px top-[17px]"
+                      style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }}
+                    />
+
+                    {timeline.map((item, index) => (
+                      <motion.button
+                        key={index}
+                        className={`relative flex flex-col items-center px-4 py-1 group transition-all ${
+                          activeEra === index ? "opacity-100" : "opacity-55 hover:opacity-85"
+                        }`}
+                        onClick={() => setActiveEra(index)}
+                        whileHover={{ y: -1 }}
+                      >
+                        <div
+                          className={`w-2.5 h-2.5 rounded-full border-2 mb-1.5 transition-all ${activeEra === index ? "scale-125" : ""}`}
+                          style={{
+                            borderColor: theme.primary,
+                            backgroundColor: activeEra === index ? theme.primary : "transparent",
+                          }}
+                        />
+                        <span className="font-serif text-[11px] font-medium" style={{ color: activeEra === index ? theme.primary : "var(--color-ink-medium)" }}>
+                          {item.era}
+                        </span>
+                        <span className="font-sans text-[10px] text-[var(--color-ink-light)] leading-none mt-0.5">{item.period}</span>
+                      </motion.button>
+                    ))}
+                  </div>
                 </div>
-              )}
+                {activeTimeline && (
+                  <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
+                    <p className="font-serif text-[11px] mb-1" style={{ color: theme.primary }}>
+                      {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
+                    </p>
+                    <p className="font-sans text-[11px] text-[var(--color-ink-medium)] leading-relaxed">
+                      {activeTimeline.detail}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
 
