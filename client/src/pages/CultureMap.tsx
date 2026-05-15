@@ -187,7 +187,7 @@ const heritageLandmarks: Landmark[] = [
     description: "海天佛国意象中的观音道场，象征海上信仰与朝圣传统。",
     significance: "体现海洋文化语境下的观音信仰传播与民间护佑精神。",
     location: "舟山普陀山文化意象",
-    coordinates: { x: 76, y: 12 },
+    coordinates: { x: 69, y: 8 },
   },
   {
     id: "heritage-nanhai-guanyin",
@@ -196,7 +196,7 @@ const heritageLandmarks: Landmark[] = [
     description: "观音立于海天之间的核心视觉母题，寓意慈悲济世。",
     significance: "连接佛教经典精神与大众审美记忆的重要图像符号。",
     location: "海上丝路文化意象",
-    coordinates: { x: 42, y: 9 },
+    coordinates: { x: 38, y: 7 },
   },
   {
     id: "heritage-changan",
@@ -205,7 +205,7 @@ const heritageLandmarks: Landmark[] = [
     description: "长安译经与传播中心的重要地标，见证佛教中国化进程。",
     significance: "承载中外文化交流与经典传播的历史记忆。",
     location: "陕西西安",
-    coordinates: { x: 29, y: 33 },
+    coordinates: { x: 49, y: 23 },
   },
   {
     id: "heritage-longmen",
@@ -214,7 +214,7 @@ const heritageLandmarks: Landmark[] = [
     description: "中国石窟艺术高峰之一，展现多朝代造像风格演变。",
     significance: "见证佛教艺术本土化与工艺体系成熟。",
     location: "河南洛阳",
-    coordinates: { x: 43, y: 50 },
+    coordinates: { x: 52, y: 38 },
   },
   {
     id: "heritage-leshan-buddha",
@@ -223,7 +223,7 @@ const heritageLandmarks: Landmark[] = [
     description: "依山凿刻的巨型弥勒坐像，是古代佛教造像工程杰作。",
     significance: "体现佛教艺术、山水地貌与古代工程技术的融合。",
     location: "四川乐山",
-    coordinates: { x: 52, y: 50 },
+    coordinates: { x: 47, y: 53 },
   },
   {
     id: "heritage-potala",
@@ -232,7 +232,7 @@ const heritageLandmarks: Landmark[] = [
     description: "雪域高原宗教与政治文化复合地标，具有强烈精神象征。",
     significance: "体现汉藏文化交流脉络与高原佛教建筑成就。",
     location: "西藏拉萨",
-    coordinates: { x: 48, y: 69 },
+    coordinates: { x: 51, y: 73 },
   },
   {
     id: "heritage-wutai",
@@ -241,7 +241,7 @@ const heritageLandmarks: Landmark[] = [
     description: "文殊信仰核心圣境之一，山岳佛教传统延续至今。",
     significance: "体现朝山传统、宗派融合与信仰共同体记忆。",
     location: "山西五台山",
-    coordinates: { x: 51, y: 84 },
+    coordinates: { x: 36, y: 87 },
   },
 ];
 
