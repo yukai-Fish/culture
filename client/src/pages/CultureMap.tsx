@@ -524,7 +524,7 @@ export default function CultureMap() {
             className="lg:col-span-4 glass-card rounded-sm p-4 h-full flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
-            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-52 md:h-60 lg:h-[18rem] shrink-0">
+            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-56 md:h-64 lg:h-[20rem] shrink-0">
               <img
                 src={previewVisual}
                 alt={selectedLandmark ? `${selectedLandmark.name}实景图` : `${theme.name}全景图`}
@@ -541,9 +541,9 @@ export default function CultureMap() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="h-full flex flex-col"
+                    className="h-full flex flex-col justify-end gap-3"
                   >
-                    <div className="mb-1">
+                    <div className="mb-0">
                       <h4 className="font-display text-2xl" style={{ color: theme.primary }}>{selectedLandmark.name}</h4>
                       <div className="flex items-center gap-2 mt-2">
                         <span className="font-sans text-xs px-2 py-0.5 rounded-sm" style={{ backgroundColor: `${theme.primary}20`, color: theme.primary }}>
@@ -553,7 +553,7 @@ export default function CultureMap() {
                       </div>
                     </div>
 
-                    <div className="mt-auto space-y-4">
+                    <div className="space-y-4">
                       <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
                         <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">历史介绍</h5>
                         <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.description}</p>
