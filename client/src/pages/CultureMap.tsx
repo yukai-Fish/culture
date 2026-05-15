@@ -532,7 +532,7 @@ export default function CultureMap() {
               />
             </div>
 
-            <div className="mt-3 flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
+            <div className="mt-3 flex-1 min-h-0 overflow-hidden pr-1 flex flex-col">
               <AnimatePresence mode="wait">
                 {selectedLandmark ? (
                   <motion.div
