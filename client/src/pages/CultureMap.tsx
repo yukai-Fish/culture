@@ -5,7 +5,9 @@ import Navigation from "@/components/Navigation";
 import { useLocation } from "wouter";
 import buddhistMapImage from "@/assets/buddhist-map.png";
 import cultureLongImage from "@/assets/culture-long-image.png";
-import leshanBuddhaTourVideo from "@/assets/leshan-buddha-tour.mp4";
+import leshanBuddhaVideo from "@/assets/leshan-buddha.mp4";
+import longmenCavesVideo from "@/assets/longmen-caves.mp4";
+import immersiveInteractionVideo from "@/assets/immersive-interaction-video.mp4";
 
 interface Landmark {
   id: string;
@@ -15,6 +17,13 @@ interface Landmark {
   significance: string;
   location: string;
   coordinates: { x: number; y: number };
+}
+
+interface TimelineEntry {
+  era: string;
+  period: string;
+  event: string;
+  detail: string;
 }
 
 const buddhistMapLandmarks: Landmark[] = [
@@ -178,7 +187,7 @@ const heritageLandmarks: Landmark[] = [
     description: "海天佛国意象中的观音道场，象征海上信仰与朝圣传统。",
     significance: "体现海洋文化语境下的观音信仰传播与民间护佑精神。",
     location: "舟山普陀山文化意象",
-    coordinates: { x: 71, y: 12 },
+    coordinates: { x: 76, y: 12 },
   },
   {
     id: "heritage-nanhai-guanyin",
@@ -187,7 +196,7 @@ const heritageLandmarks: Landmark[] = [
     description: "观音立于海天之间的核心视觉母题，寓意慈悲济世。",
     significance: "连接佛教经典精神与大众审美记忆的重要图像符号。",
     location: "海上丝路文化意象",
-    coordinates: { x: 39, y: 9 },
+    coordinates: { x: 42, y: 9 },
   },
   {
     id: "heritage-changan",
@@ -196,7 +205,7 @@ const heritageLandmarks: Landmark[] = [
     description: "长安译经与传播中心的重要地标，见证佛教中国化进程。",
     significance: "承载中外文化交流与经典传播的历史记忆。",
     location: "陕西西安",
-    coordinates: { x: 31, y: 34 },
+    coordinates: { x: 29, y: 33 },
   },
   {
     id: "heritage-longmen",
@@ -205,7 +214,16 @@ const heritageLandmarks: Landmark[] = [
     description: "中国石窟艺术高峰之一，展现多朝代造像风格演变。",
     significance: "见证佛教艺术本土化与工艺体系成熟。",
     location: "河南洛阳",
-    coordinates: { x: 48, y: 53 },
+    coordinates: { x: 43, y: 50 },
+  },
+  {
+    id: "heritage-leshan-buddha",
+    name: "乐山大佛",
+    era: "唐代",
+    description: "依山凿刻的巨型弥勒坐像，是古代佛教造像工程杰作。",
+    significance: "体现佛教艺术、山水地貌与古代工程技术的融合。",
+    location: "四川乐山",
+    coordinates: { x: 52, y: 50 },
   },
   {
     id: "heritage-potala",
@@ -214,7 +232,7 @@ const heritageLandmarks: Landmark[] = [
     description: "雪域高原宗教与政治文化复合地标，具有强烈精神象征。",
     significance: "体现汉藏文化交流脉络与高原佛教建筑成就。",
     location: "西藏拉萨",
-    coordinates: { x: 47, y: 72 },
+    coordinates: { x: 48, y: 69 },
   },
   {
     id: "heritage-wutai",
@@ -223,29 +241,35 @@ const heritageLandmarks: Landmark[] = [
     description: "文殊信仰核心圣境之一，山岳佛教传统延续至今。",
     significance: "体现朝山传统、宗派融合与信仰共同体记忆。",
     location: "山西五台山",
-    coordinates: { x: 46, y: 89 },
+    coordinates: { x: 51, y: 84 },
   },
 ];
 
-const timelineData: Record<string, { era: string; period: string; event: string }[]> = {
+const timelineData: Record<string, TimelineEntry[]> = {
   buddhist: [
-    { era: "东汉", period: "67年", event: "佛教传入中国" },
-    { era: "隋唐", period: "6-9世纪", event: "宗派形成与繁荣" },
-    { era: "宋元", period: "10-14世纪", event: "禅宗广泛传播" },
-    { era: "当代", period: "20世纪至今", event: "文化保护与数字化传承" },
+    { era: "东汉", period: "67年", event: "佛教传入中国", detail: "由丝路与官方译经体系进入中原，奠定后续宗派发展的文化基础。" },
+    { era: "隋唐", period: "6-9世纪", event: "宗派形成与繁荣", detail: "天台、华严、禅宗等体系逐步成熟，寺院网络与经典传播达到高峰。" },
+    { era: "宋元", period: "10-14世纪", event: "禅宗广泛传播", detail: "禅宗深入士人和民间生活，山林寺院与城市道场共同构成传播格局。" },
+    { era: "当代", period: "20世纪至今", event: "文化保护与数字化传承", detail: "石窟、古寺与文献进入系统保护阶段，并通过数字化实现更广泛传播。" },
   ],
   taoist: [
-    { era: "先秦", period: "公元前", event: "《道德经》奠基思想" },
-    { era: "东汉", period: "2世纪", event: "道教组织化发展" },
-    { era: "唐宋", period: "7-13世纪", event: "经典体系与宫观兴盛" },
-    { era: "当代", period: "20世纪至今", event: "养生文化大众传播" },
+    { era: "先秦", period: "公元前", event: "《道德经》奠基思想", detail: "无为、自然与天人观念形成核心思想源流，深刻影响后世文化表达。" },
+    { era: "东汉", period: "2世纪", event: "道教组织化发展", detail: "教团与仪式体系逐步建立，道教从思想传统转向制度化宗教形态。" },
+    { era: "唐宋", period: "7-13世纪", event: "经典体系与宫观兴盛", detail: "宫观建设和斋醮礼仪完善，道教文献整理与传播进入稳定阶段。" },
+    { era: "当代", period: "20世纪至今", event: "养生文化大众传播", detail: "道教养生、节气观与生态理念进入公众视野，形成新的生活化表达。" },
   ],
   mazu: [
-    { era: "宋代", period: "10世纪", event: "妈祖信俗形成" },
-    { era: "明代", period: "14-17世纪", event: "随海上贸易广泛传播" },
-    { era: "清代", period: "17-19世纪", event: "沿海庙宇体系成熟" },
-    { era: "当代", period: "2009年", event: "列入人类非遗代表作名录" },
+    { era: "宋代", period: "10世纪", event: "妈祖信俗形成", detail: "沿海民众以护航与祈安为核心诉求，逐渐形成区域性海神信仰共同体。" },
+    { era: "明代", period: "14-17世纪", event: "随海上贸易广泛传播", detail: "随海商与移民网络扩展，妈祖信俗在东南沿海和海外港口持续落地。" },
+    { era: "清代", period: "17-19世纪", event: "沿海庙宇体系成熟", detail: "庙宇祭典、进香线路与地方社会治理相互嵌合，形成稳定信俗生态。" },
+    { era: "当代", period: "2009年", event: "列入人类非遗代表作名录", detail: "非遗认定推动跨区域交流和现代传播，信俗价值被更广泛理解与传承。" },
   ],
+};
+
+const defaultVisualByCulture: Record<string, string> = {
+  buddhist: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/buddhist-scene-Ux9ui2oiJpqTTUbVNYuwEr.webp",
+  taoist: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/taoist-scene-dqe3LQzNw5iLurCF9TiEYw.webp",
+  mazu: "https://d2xsxph8kpxj0f.cloudfront.net/310519663483417886/kYBtoRJU9wxjUEZsBMbRsh/mazu-scene-FfuCytmAEKRrHxKejt8WWb.webp",
 };
 
 export default function CultureMap() {
@@ -254,6 +278,7 @@ export default function CultureMap() {
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [activeEra, setActiveEra] = useState<number>(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [modalVideoSrc, setModalVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (!culture || !theme) setLocation("/");
@@ -263,11 +288,24 @@ export default function CultureMap() {
 
   const landmarks = landmarksData[culture] || [];
   const timeline = timelineData[culture] || [];
+  const activeTimeline = timeline[activeEra] || timeline[0];
+
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+    setModalVideoSrc(null);
+  };
 
   const handleLandmarkClick = (landmark: Landmark) => {
     setSelectedLandmark(landmark);
     if (landmark.id === "heritage-longmen") {
+      setModalVideoSrc(longmenCavesVideo);
       setIsVideoModalOpen(true);
+      return;
+    }
+    if (landmark.id === "heritage-leshan-buddha") {
+      setModalVideoSrc(leshanBuddhaVideo);
+      setIsVideoModalOpen(true);
+      return;
     }
   };
 
@@ -291,7 +329,7 @@ export default function CultureMap() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 glass-card rounded-sm p-4 h-[60vh] flex flex-col"
+            className="lg:col-span-3 glass-card rounded-sm p-4 h-[56vh] flex flex-col"
           >
             <h3 className="shrink-0 h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文脉传承
@@ -331,7 +369,7 @@ export default function CultureMap() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="lg:col-span-5 glass-card rounded-sm p-4 relative min-h-[60vh] flex flex-col"
+            className="lg:col-span-5 glass-card rounded-sm p-4 relative min-h-[56vh] flex flex-col"
           >
             <h3 className="h-8 flex items-center font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-3">
               文化地图 · {culture === "mazu" ? "福建" : culture === "taoist" ? "四川" : "四川 · 福建"}
@@ -398,6 +436,16 @@ export default function CultureMap() {
                   ))}
                 </div>
               </div>
+              {activeTimeline && (
+                <div className="mt-3 rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
+                  <p className="font-serif text-[11px] mb-1" style={{ color: theme.primary }}>
+                    {activeTimeline.era} · {activeTimeline.period} · {activeTimeline.event}
+                  </p>
+                  <p className="font-sans text-[11px] text-[var(--color-ink-medium)] leading-relaxed">
+                    {activeTimeline.detail}
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -405,52 +453,92 @@ export default function CultureMap() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-4 glass-card rounded-sm p-4 overflow-y-auto custom-scrollbar max-h-[60vh]"
+            className="lg:col-span-4 glass-card rounded-sm p-4 h-[56vh] flex flex-col"
           >
             <h3 className="font-serif text-sm font-semibold text-[var(--color-mountain-near)] mb-4">解读说明</h3>
+            <div className="relative rounded-sm overflow-hidden border border-[var(--color-mountain-near)]/15 bg-white/40 h-36 shrink-0">
+              {culture === "buddhist" ? (
+                <video
+                  className="w-full h-full object-cover"
+                  src={immersiveInteractionVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                <img
+                  src={defaultVisualByCulture[culture]}
+                  alt={`${theme.name}全景图`}
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
 
-            <AnimatePresence mode="wait">
-              {selectedLandmark ? (
-                <motion.div
-                  key={selectedLandmark.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="mb-4">
-                    <h4 className="font-display text-2xl" style={{ color: theme.primary }}>{selectedLandmark.name}</h4>
-                    <div className="flex items-center gap-2 mt-2">
-                      <span className="font-sans text-xs px-2 py-0.5 rounded-sm" style={{ backgroundColor: `${theme.primary}20`, color: theme.primary }}>
-                        {selectedLandmark.era}
-                      </span>
-                      <span className="font-sans text-xs text-[var(--color-ink-light)]">{selectedLandmark.location}</span>
+            <div className="mt-3 flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
+              <AnimatePresence mode="wait">
+                {selectedLandmark ? (
+                  <motion.div
+                    key={selectedLandmark.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-4"
+                  >
+                    <div className="mb-1">
+                      <h4 className="font-display text-2xl" style={{ color: theme.primary }}>{selectedLandmark.name}</h4>
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="font-sans text-xs px-2 py-0.5 rounded-sm" style={{ backgroundColor: `${theme.primary}20`, color: theme.primary }}>
+                          {selectedLandmark.era}
+                        </span>
+                        <span className="font-sans text-xs text-[var(--color-ink-light)]">{selectedLandmark.location}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="ink-divider mb-4" />
-
-                  <div className="space-y-4">
-                    <div>
+                    <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
                       <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">历史介绍</h5>
                       <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.description}</p>
                     </div>
-                    <div>
+
+                    <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
                       <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">文化意义</h5>
                       <p className="font-sans text-sm text-[var(--color-ink-dark)] leading-relaxed">{selectedLandmark.significance}</p>
                     </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center h-48 text-center">
-                  <div className="font-display text-4xl opacity-20 mb-4" style={{ color: theme.primary }}>
-                    {culture === "buddhist" ? "莲" : culture === "taoist" ? "道" : "海"}
-                  </div>
-                  <p className="font-sans text-sm text-[var(--color-ink-light)]">点击地图或文脉传承亮点</p>
-                  <p className="font-sans text-xs text-[var(--color-ink-light)] mt-1">查看详细文化解读</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                    {activeTimeline && (
+                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5">
+                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">时代关联</h5>
+                        <p className="font-serif text-[12px] mb-1" style={{ color: theme.primary }}>
+                          {activeTimeline.era} · {activeTimeline.event}
+                        </p>
+                        <p className="font-sans text-xs text-[var(--color-ink-medium)] leading-relaxed">{activeTimeline.detail}</p>
+                      </div>
+                    )}
+                  </motion.div>
+                ) : (
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="h-full flex flex-col justify-between">
+                    <div>
+                      <div className="font-display text-4xl opacity-20 mb-3" style={{ color: theme.primary }}>
+                        {culture === "buddhist" ? "莲" : culture === "taoist" ? "道" : "海"}
+                      </div>
+                      <p className="font-sans text-sm text-[var(--color-ink-light)]">点击地图或文脉传承亮点</p>
+                      <p className="font-sans text-xs text-[var(--color-ink-light)] mt-1">查看详细文化解读</p>
+                    </div>
+                    {activeTimeline && (
+                      <div className="rounded-sm border border-[var(--color-mountain-near)]/15 bg-white/45 p-2.5 mt-4">
+                        <h5 className="font-serif text-xs text-[var(--color-ink-light)] mb-1">当前时间轴提示</h5>
+                        <p className="font-serif text-[12px] mb-1" style={{ color: theme.primary }}>
+                          {activeTimeline.era} · {activeTimeline.event}
+                        </p>
+                        <p className="font-sans text-xs text-[var(--color-ink-medium)] leading-relaxed">{activeTimeline.detail}</p>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
 
@@ -461,7 +549,7 @@ export default function CultureMap() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[100] bg-black/65 backdrop-blur-sm flex items-center justify-center px-4"
-              onClick={() => setIsVideoModalOpen(false)}
+              onClick={closeVideoModal}
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.96, y: 12 }}
@@ -473,14 +561,14 @@ export default function CultureMap() {
               >
                 <button
                   className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-black/55 text-white text-lg leading-none hover:bg-black/70 transition-colors"
-                  onClick={() => setIsVideoModalOpen(false)}
+                  onClick={closeVideoModal}
                   aria-label="关闭视频"
                 >
                   ×
                 </button>
                 <video
                   className="w-full max-h-[70vh] rounded-sm bg-black object-contain"
-                  src={leshanBuddhaTourVideo}
+                  src={modalVideoSrc || undefined}
                   controls
                   autoPlay
                   playsInline
